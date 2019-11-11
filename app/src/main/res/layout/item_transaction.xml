@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    style="@style/Widget.AppCompat.ListView"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/cardview_default_margin"
+    android:layout_marginEnd="@dimen/cardview_default_margin"
+    android:paddingBottom="@dimen/item_margin_bottom"
+    android:paddingTop="@dimen/item_margin_bottom"
+    android:divider="?android:dividerHorizontal"
+    android:showDividers="middle"
+    >
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_item_transaction_fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2019-11-12 14:30.223"/>
+        <TextView
+            android:id="@+id/tv_item_transaction_nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nombre origen"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saldo"/>
+        <TextView
+            android:id="@+id/tv_item_transaction_saldo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="##### $us"/>
+    </LinearLayout>
+</LinearLayout>

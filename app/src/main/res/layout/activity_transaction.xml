@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_margin="@dimen/cardview_default_margin"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        app:cardCornerRadius="@dimen/cardview_default_radius"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_margin="@dimen/cardview_default_margin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_nro_cuenta_transacciones"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nº Cuenta    ########"
+                />
+            <TextView
+                android:id="@+id/tv_saldo_transacciones"
+                android:textAlignment="textEnd"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Saldo ### $us"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:layout_marginBottom="@dimen/cardview_default_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Movimientos"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_listado_transacciones"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
