@@ -1,5 +1,6 @@
 package com.example.virtualwallets.loginComponent.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.virtualwallets.MainView;
 import com.example.virtualwallets.R;
 import com.example.virtualwallets.loginComponent.model.Login;
 import com.example.virtualwallets.loginComponent.model.LoginServiceImplement;
@@ -42,6 +44,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     public void showLoginSuccessMessage() {
         String welcome = getString(R.string.welcome);
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        Intent i = new Intent(LoginActivity.this, MainView.class);
+
     }
 
     @Override
