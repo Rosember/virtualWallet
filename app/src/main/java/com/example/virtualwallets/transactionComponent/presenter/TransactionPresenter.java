@@ -17,7 +17,7 @@ public class TransactionPresenter {
         transactionModel = new TransactionModel(new TransactionServiceImplement());
     }
 
-    public void onGetAllTransactions(String numberAccount) {
+    public void getTransactions(String numberAccount) {
 
         List<DaoTransaction> transactionList =  transactionModel.geTransactions(numberAccount);
         if (transactionList!=null && transactionList.size()>0 ){
@@ -27,7 +27,7 @@ public class TransactionPresenter {
         }
         if (transactionList!=null && transactionList.size() == 0){
             iTransactionWalletsView.showAccount();
-            iTransactionWalletsView.showNoTransacton();
+            iTransactionWalletsView.showNoTransaction();
             return;
         }
         if (transactionList==null){

@@ -12,7 +12,7 @@ public interface ITransactionWalletsView {
 
     void showCurrentBalance(double balance);
     void showTransactions(List<DaoTransaction> transactionList);
-    void showNoTransacton(); //no exist transaction
+    void showNoTransaction(); //no exist transaction
     void showNetworkErrorMessage();
     void showAccount();
 }

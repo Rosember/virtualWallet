@@ -1,13 +1,10 @@
 package com.example.virtualwallets.transactionComponent.view;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 
 import androidx.appcompat.app.ActionBar;
@@ -20,10 +17,7 @@ import com.example.virtualwallets.R;
 import com.example.virtualwallets.transactionComponent.model.DaoTransaction;
 import com.example.virtualwallets.transactionComponent.presenter.TransactionPresenter;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -36,7 +30,6 @@ public class TransactionWalletsView extends AppCompatActivity implements ITransa
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private String numberAccount;
-    private float balance;
 
     private TextView textView_NumberAccount;
     private TextView textView_balance;
@@ -55,22 +48,21 @@ public class TransactionWalletsView extends AppCompatActivity implements ITransa
             actionBar.setTitle(R.string.title_transaction);
         }
 
+        numberAccount = "2421560000562";
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
 
-        numberAccount = "2421560000562";
-        balance = 352;
-
         presenter = new TransactionPresenter(this);
         presenter.getCurrentBalance(numberAccount);
-        presenter.onGetAllTransactions(numberAccount);
+        presenter.getTransactions(numberAccount);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 // Esto se ejecuta cada vez que se realiza el gesto
                 swipeRefreshLayout.setRefreshing(true);
-                presenter.onGetAllTransactions(numberAccount);
+                presenter.getCurrentBalance(numberAccount);
+                presenter.getTransactions(numberAccount);
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -79,7 +71,7 @@ public class TransactionWalletsView extends AppCompatActivity implements ITransa
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                //finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -124,7 +116,7 @@ public class TransactionWalletsView extends AppCompatActivity implements ITransa
     }
 
     @Override
-    public void showNoTransacton() {
+    public void showNoTransaction() {
         String networkError = getString(R.string.there_are_no_transaction);
         Toast.makeText(getApplicationContext(), networkError, Toast.LENGTH_LONG).show();
     }
