@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.virtualwallets.MainView;
+import com.example.virtualwallets.mainComponent.view.MainView;
 import com.example.virtualwallets.R;
 import com.example.virtualwallets.loginComponent.model.Login;
 import com.example.virtualwallets.loginComponent.model.LoginServiceImplement;

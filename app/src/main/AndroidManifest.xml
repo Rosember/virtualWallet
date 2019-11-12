@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainView"/>
+        <activity android:name=".mainComponent.view.MainView"/>
         <activity android:name=".transactionComponent.view.TransactionWalletsView"/>
         <activity android:name=".transferComponent.view.TransferView"/>
 
