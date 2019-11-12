@@ -1,96 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/activity_horizontal_margin"
-    android:layout_marginTop="@dimen/activity_horizontal_margin"
-    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".transferComponent.view.TransferView">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_cuenta_origen"
-        android:layout_marginTop="@dimen/form_space"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_transfer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:titleTextColor="@color/colorWhite" />
 
-        <EditText
-            android:id="@+id/edit_text_cuenta_origen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Origen" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginTop="@dimen/form_space"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/edit_text_destino"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Destino" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="@dimen/form_space"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        >
-        <EditText
-            android:id="@+id/edit_text_nro_cuenta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nro Cuenta"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="@dimen/form_space"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        >
-        <EditText
-            android:id="@+id/edit_text_list_destino"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mis cuentas"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="@dimen/form_space"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        >
-        <EditText
-            android:id="@+id/edit_text_monto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Monto"
-            android:inputType="number"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
     <LinearLayout
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <androidx.appcompat.widget.AppCompatButton
-            android:background="@color/colorPrimary"
-            android:textColor="@color/colorWhite"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_transfer"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_cuenta_origen"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cancelar"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:background="@color/colorPrimary"
-            android:textColor="@color/colorWhite"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/form_space">
+
+            <EditText
+                android:id="@+id/edit_text_cuenta_origen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Origen" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enviar"/>
+            android:layout_marginTop="@dimen/form_space">
+
+            <EditText
+                android:id="@+id/edit_text_destino"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Destino" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/form_space">
+
+            <EditText
+                android:id="@+id/edit_text_nro_cuenta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nro Cuenta" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/form_space">
+
+            <EditText
+                android:id="@+id/edit_text_list_destino"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mis cuentas" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/form_space">
+
+            <EditText
+                android:id="@+id/edit_text_monto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Monto"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_cancel_transfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="Cancelar"
+            android:textColor="@color/colorWhite" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_send_transfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="Enviar"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+</RelativeLayout>

@@ -9,11 +9,22 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.virtualwallets.mainComponent.view.MainView;
+import com.example.virtualwallets.AppBase;
+import com.example.virtualwallets.mainComponent.view.MainActivity;
 import com.example.virtualwallets.R;
 import com.example.virtualwallets.loginComponent.model.Login;
 import com.example.virtualwallets.loginComponent.model.LoginServiceImplement;
 import com.example.virtualwallets.loginComponent.presenter.LoginPresenter;
+import com.example.virtualwallets.utils.CheckSession;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class LoginActivity extends AppCompatActivity implements ILoginView {
 
@@ -44,8 +55,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     public void showLoginSuccessMessage() {
         String welcome = getString(R.string.welcome);
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        Intent i = new Intent(LoginActivity.this, MainView.class);
-
+        saveSession();
     }
 
     @Override
@@ -58,5 +68,31 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     public void showNetworkErrorMessage() {
         String networkError = getString(R.string.network_error);
         Toast.makeText(getApplicationContext(), networkError, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void saveSession() {
+        Completable.fromAction(()->{
+            SimpleDateFormat format1 = new SimpleDateFormat(CheckSession.YYYY_MM_DD_T_HH_MM_SS_SSS, Locale.US);
+            String sessionDate = format1.format(Calendar.getInstance().getTime());
+            AppBase.getInstance().saveset(CheckSession.KEY_SESSION, sessionDate);
+        }).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver(){
+
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
     }
 }

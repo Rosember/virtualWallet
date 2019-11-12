@@ -6,5 +6,7 @@ package com.example.virtualwallets.mainComponent.view;
  */
 public interface IMainView {
 
-
+    void onLoad();
+    void onStopRefreshSwipeWallet();
+    void onStartRefreshSwipeWallet();
 }

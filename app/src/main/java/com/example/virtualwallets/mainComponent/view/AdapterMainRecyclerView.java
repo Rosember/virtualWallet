@@ -51,9 +51,11 @@ public class AdapterMainRecyclerView extends RecyclerView.Adapter<RecyclerView.V
         OnItemRecyclerViewClickListener listener;
 
         @BindView(R.id.tv_item_nro_cuenta_billetera)
-        private TextView walletId;
+        public TextView walletId;
+
         @BindView(R.id.tv_item_saldo_billetera)
-        private TextView walletSaldo;
+        public TextView walletSaldo;
+
         private  Wallets wallets;
 
         public RecyclerViewMain(LayoutInflater inflater, ViewGroup parent,OnItemRecyclerViewClickListener listener) {

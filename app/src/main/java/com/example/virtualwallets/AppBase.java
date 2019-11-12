@@ -1,6 +1,11 @@
 package com.example.virtualwallets;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.example.virtualwallets.mainComponent.Application;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -16,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AppBase {
 
     public static final String BASE_URL_SERVICE ="http://localhost:8081/";
+    private static final String APP_PREFERENCE = "Wallets";
     private static AppBase _INSTANCE = new AppBase();
 
     public static AppBase getInstance() {
@@ -52,4 +58,45 @@ public class AppBase {
         Retrofit adapter = builder.client(httpClient.build()).build();
         return adapter.create(sClass);
     }
+
+    /**
+     * metodo para recuperar variables goblales de la aplicacion e.g. token.
+     */
+    public String retrieveset(String name) {
+        //retreive
+        String res = "";
+        Context c = Application.getAppContext();
+        SharedPreferences sharedPref = c.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE);
+        res = sharedPref.getString(name, null);
+        return res;
+    }
+
+    /**
+     * metodo para guardar algunas variables globales token, usuario, etc.
+     * Pensado para obtener valor de token y otros para los servicios.
+     */
+    public void saveset(String key, String value) {
+        //store
+        Context c = Application.getAppContext();
+        SharedPreferences sharedPref = c.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(key, value);
+        editor.apply();
+    }
+
+    public void clearAllSharedPreference() {
+        Context c = Application.getAppContext();
+        SharedPreferences settings = c.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE);
+        settings.edit().clear().apply();
+    }
+
+    public void removeKey(String key){
+        Context c = Application.getAppContext();
+        SharedPreferences mySPrefs = c.getSharedPreferences(APP_PREFERENCE,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySPrefs.edit();
+        editor.remove(key);
+        editor.apply();
+    }
+
+
 }
