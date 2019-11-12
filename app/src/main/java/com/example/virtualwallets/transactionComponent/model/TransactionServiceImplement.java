@@ -39,4 +39,13 @@ public class TransactionServiceImplement implements ITransactionService {
 
         return transactionList;
     }
+
+    @Override
+    public double getCurrentBalanceByNumberAccount(String numberAccount) {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(AppBase.BASE_URL_SERVICE)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build() ;
+
+        return 954.52;
+    }
 }

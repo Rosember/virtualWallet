@@ -14,4 +14,9 @@ public class TransactionModel {
         List<DaoTransaction> transactionList =  iTransactionService.getTransaction(numberAccount);
         return  transactionList;
     }
+
+    public Double getCurrentBalance(String numberAccount) {
+        double currentBalance = iTransactionService.getCurrentBalanceByNumberAccount(numberAccount);
+        return currentBalance;
+    }
 }

@@ -17,7 +17,8 @@ public class TransactionPresenter {
         transactionModel = new TransactionModel(new TransactionServiceImplement());
     }
 
-    public void onGetAllTransactions(String numberAccount){
+    public void onGetAllTransactions(String numberAccount) {
+
         List<DaoTransaction> transactionList =  transactionModel.geTransactions(numberAccount);
         if (transactionList!=null && transactionList.size()>0 ){
             iTransactionWalletsView.showAccount();
@@ -34,5 +35,14 @@ public class TransactionPresenter {
             return;
         }
 
+    }
+
+    public void getCurrentBalance(String numberAccount) {
+        Double balance =  transactionModel.getCurrentBalance(numberAccount);
+        if (balance!= null){
+            iTransactionWalletsView.showCurrentBalance(balance);
+            return;
+        }
+        iTransactionWalletsView.showNetworkErrorMessage();
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface ITransactionWalletsView {
 
+    void showCurrentBalance(double balance);
     void showTransactions(List<DaoTransaction> transactionList);
     void showNoTransacton(); //no exist transaction
     void showNetworkErrorMessage();

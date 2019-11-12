@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
 
-        loginPresenter = new LoginPresenter(this, new Login(new LoginServiceImplement()));
+        loginPresenter = new LoginPresenter(this);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
