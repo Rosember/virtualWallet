@@ -2,6 +2,7 @@ package com.example.virtualwallets.loginComponent.presenter;
 
 import com.example.virtualwallets.loginComponent.model.ILoginCallback;
 import com.example.virtualwallets.loginComponent.model.Login;
+import com.example.virtualwallets.loginComponent.model.LoginServiceImplement;
 import com.example.virtualwallets.loginComponent.view.ILoginView;
 
 public class LoginPresenter {
@@ -9,9 +10,9 @@ public class LoginPresenter {
     private ILoginView view;
     private Login login;
 
-    public LoginPresenter(ILoginView view, Login login) {
+    public LoginPresenter(ILoginView view) {
         this.view = view;
-        this.login = login;
+        this.login = new Login(new LoginServiceImplement());
     }
 
     public void onLoginButtonPressed(String email, String password) {

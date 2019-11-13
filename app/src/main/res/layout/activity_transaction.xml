@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <com.google.android.material.card.MaterialCardView
         android:layout_margin="@dimen/cardview_default_margin"
         android:layout_width="match_parent"
@@ -36,12 +37,23 @@
 
     <TextView
         android:layout_marginBottom="@dimen/cardview_default_margin"
+        android:layout_marginLeft="@dimen/cardview_default_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Movimientos"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_listado_transacciones"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_listado_transacciones"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="3dp"
+            android:scrollbars="vertical"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </LinearLayout>

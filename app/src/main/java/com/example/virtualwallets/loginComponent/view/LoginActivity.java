@@ -14,6 +14,7 @@ import com.example.virtualwallets.R;
 import com.example.virtualwallets.loginComponent.model.Login;
 import com.example.virtualwallets.loginComponent.model.LoginServiceImplement;
 import com.example.virtualwallets.loginComponent.presenter.LoginPresenter;
+import com.example.virtualwallets.transactionComponent.view.TransactionWalletsView;
 
 public class LoginActivity extends AppCompatActivity implements ILoginView {
 
@@ -28,7 +29,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
 
-        loginPresenter = new LoginPresenter(this, new Login(new LoginServiceImplement()));
+        loginPresenter = new LoginPresenter(this);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,8 +45,9 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     public void showLoginSuccessMessage() {
         String welcome = getString(R.string.welcome);
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        Intent i = new Intent(LoginActivity.this, MainView.class);
-
+        Intent i = new Intent(LoginActivity.this, TransactionWalletsView.class);
+        startActivity(i);
+        this.finish();
     }
 
     @Override
