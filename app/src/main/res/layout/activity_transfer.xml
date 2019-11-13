@@ -37,12 +37,15 @@
 
             <EditText
                 android:id="@+id/edit_text_cuenta_origen"
+                android:drawableEnd="@drawable/ic_expand_more_black_36dp"
+                android:paddingLeft="@dimen/padding_hint_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Origen" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_destino"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,38 +53,50 @@
 
             <EditText
                 android:id="@+id/edit_text_destino"
+                android:drawableEnd="@drawable/ic_expand_more_black_36dp"
+                android:paddingLeft="@dimen/padding_hint_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Destino" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_nro_cuenta"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/form_space">
+            android:layout_marginTop="@dimen/form_space"
+            android:visibility="gone"
+            >
 
             <EditText
                 android:id="@+id/edit_text_nro_cuenta"
+                android:paddingLeft="@dimen/padding_hint_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nro Cuenta" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_list_destino"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/form_space">
+            android:layout_marginTop="@dimen/form_space"
+            android:visibility="gone"
+            >
 
             <EditText
                 android:id="@+id/edit_text_list_destino"
+                android:drawableEnd="@drawable/ic_expand_more_black_36dp"
+                android:paddingLeft="@dimen/padding_hint_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Mis cuentas" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_monto"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,6 +104,7 @@
 
             <EditText
                 android:id="@+id/edit_text_monto"
+                android:paddingLeft="@dimen/padding_hint_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Monto"
