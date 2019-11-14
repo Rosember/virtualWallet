@@ -2,6 +2,7 @@ package com.example.virtualwallets.mainComponent.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -16,6 +17,7 @@ import com.example.virtualwallets.POJOS.Wallets;
 import com.example.virtualwallets.R;
 import com.example.virtualwallets.mainComponent.presenter.IMainPresenter;
 import com.example.virtualwallets.mainComponent.presenter.MainPresenter;
+import com.example.virtualwallets.transactionComponent.view.TransactionWalletsView;
 import com.example.virtualwallets.transferComponent.view.TransferView;
 import com.example.virtualwallets.utils.CheckSession;
 import com.example.virtualwallets.utils.OnItemRecyclerViewClickListener;
@@ -41,6 +43,7 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity implements IMainView, OnItemRecyclerViewClickListener {
 
 
+    private final String TAG = getClass().getSimpleName();
     @BindView(R.id.rv_list_wallet_main)
     public RecyclerView recyclerView;
     @BindView(R.id.fv_main_action_transaction)
@@ -71,7 +74,8 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
 
     private void setupRecyclerView() {
         listWallet = new ArrayList<>();
-        listWallet.add(new Wallets());
+        listWallet.add(new Wallets(1233,"Billetera 112",345.90));
+        listWallet.add(new Wallets(1234,"Billetera 113", 5656.56));
         adapter = new AdapterMainRecyclerView(listWallet, this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getParent()));
@@ -96,7 +100,9 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
 
     @Override
     public void itemClick(Object o, int pos) {
-
+        Log.d(TAG, "itemClick: mainActivity ");
+        Intent i = new Intent(MainActivity.this, TransactionWalletsView.class);
+        startActivity(i);
     }
 
     @Override

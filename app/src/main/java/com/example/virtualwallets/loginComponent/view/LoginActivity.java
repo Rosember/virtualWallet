@@ -2,6 +2,7 @@ package com.example.virtualwallets.loginComponent.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import com.example.virtualwallets.transactionComponent.view.TransactionWalletsView;
 
 public class LoginActivity extends AppCompatActivity implements ILoginView {
 
@@ -39,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
 
-        loginPresenter = new LoginPresenter(this, new Login(new LoginServiceImplement()));
+        loginPresenter = new LoginPresenter(this);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,20 +56,24 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     @Override
     public void showLoginSuccessMessage() {
         String welcome = getString(R.string.welcome);
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+//        Intent i = new Intent(LoginActivity.this, TransactionWalletsView.class);
+//        startActivity(i);
+//        this.finish();
         saveSession();
     }
 
     @Override
     public void showInvalidCredentialsMessage() {
         String invalidCredential = getString(R.string.login_failed);
-        Toast.makeText(getApplicationContext(), invalidCredential, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getBaseContext(), invalidCredential, Toast.LENGTH_LONG).show();
+        Log.d("LoginActivity", "showInvalidCredentialsMessage: error");
     }
 
     @Override
     public void showNetworkErrorMessage() {
         String networkError = getString(R.string.network_error);
-        Toast.makeText(getApplicationContext(), networkError, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), networkError, Toast.LENGTH_LONG).show();
     }
 
     @Override

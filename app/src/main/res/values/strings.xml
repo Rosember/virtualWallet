@@ -10,4 +10,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="network_error">"Network error"</string>
+    <string name="there_are_no_transaction">"There are no transactions"</string>
+    <string name="title_transaction">"Transactions"</string>
+
 </resources>

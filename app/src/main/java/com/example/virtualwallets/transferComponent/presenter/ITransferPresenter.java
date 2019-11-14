@@ -5,4 +5,6 @@ package com.example.virtualwallets.transferComponent.presenter;
  * Creado el 2019-11-11
  */
 public interface ITransferPresenter {
+
+    void onResume();
 }
