@@ -81,8 +81,8 @@ public class AdapterMainRecyclerView extends RecyclerView.Adapter<AdapterMainRec
 
         public void bind(Wallets wallets){
             this.wallets = wallets;
-            walletId.setText("Billetera #"+wallets.getId());
-            walletSaldo.setText("Saldo : "+wallets.getSaldo() +" $us");
+            walletId.setText("Wallet Nro "+wallets.getNombre());
+            walletSaldo.setText("Balance  "+wallets.getSaldo() +" $us");
 
         }
 

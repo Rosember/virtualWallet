@@ -6,5 +6,6 @@ package com.example.virtualwallets.mainComponent.model;
  */
 public interface IMainModel {
     void onLoadWallets();
+    void logout();
     void onResume();
 }

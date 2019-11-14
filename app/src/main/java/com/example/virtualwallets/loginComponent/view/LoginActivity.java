@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         Completable.fromAction(()->{
             SimpleDateFormat format1 = new SimpleDateFormat(CheckSession.YYYY_MM_DD_T_HH_MM_SS_SSS, Locale.US);
             String sessionDate = format1.format(Calendar.getInstance().getTime());
-            AppBase.getInstance().saveset(CheckSession.KEY_SESSION, sessionDate);
+            AppBase.saveset(CheckSession.KEY_SESSION, sessionDate);
         }).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver(){
 
             @Override
