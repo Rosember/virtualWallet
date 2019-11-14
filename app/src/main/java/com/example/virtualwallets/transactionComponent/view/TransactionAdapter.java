@@ -1,5 +1,6 @@
 package com.example.virtualwallets.transactionComponent.view;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,5 +56,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         viewHolder.fecha.setText(String.valueOf(items.get(i).getFecha()));
         viewHolder.glosa.setText(items.get(i).getGlosa());
         viewHolder.monto.setText("$:"+ String.valueOf(items.get(i).getMonto()));
+        if (items.get(i).getMonto()<0){
+            viewHolder.monto.setTextColor(Color.RED);
+        }
     }
 }

@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppBase {
 
-    public static final String IP = "10.1.3.102";
+    public static final String IP = "10.1.3.112";
     public static final String BASE_URL_SERVICE ="http://"+IP+":8081/api/";
     public static final String KEY_TOKEN = "token";
     private static final String APP_PREFERENCE = "Wallets";

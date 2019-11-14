@@ -49,7 +49,9 @@ public class LoginServiceImplement implements ILoginService {
 
                         @Override
                         public void onError(Throwable e) {
-                            presenter.onLoginError();
+                            String mensaje = "Falla al conectar con el servicio";
+                            Log.d(TAG, mensaje + ". Detalle del error:"+ e.getMessage());
+                            presenter.onNetworkError();
                         }
 
                         @Override
@@ -60,7 +62,7 @@ public class LoginServiceImplement implements ILoginService {
         }catch (Exception e){
             e.printStackTrace();
             Log.d(TAG, "performLogin: ");
-            presenter.onLoginError();
+            presenter.onLoginInvalidCredentials();
         }
     }
 }
