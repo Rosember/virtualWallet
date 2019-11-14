@@ -43,7 +43,7 @@ public class LoginServiceImplement implements ILoginService {
                         public void onNext(LoginResponse loginResponse) {
                             Log.d(TAG, "onResponse: " + loginResponse.getToken());
 
-                            AppBase.getInstance().saveset(AppBase.KEY_TOKEN, loginResponse.getToken());
+                            AppBase.saveset(AppBase.KEY_TOKEN, loginResponse.getToken());
                             presenter.onLoginSucces();
                         }
 
