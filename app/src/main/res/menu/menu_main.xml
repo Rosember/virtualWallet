@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item android:id="@+id/menu_main_logout"
+        android:orderInCategory="100"
+        android:title="logout"
+        android:icon="@drawable/ic_logout_32x32"
+        app:showAsAction="ifRoom"
+        />
+<!--    <item-->
+<!--        android:id="@+id/menu_filtro_proyecto"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:title="Filtro"-->
+<!--        android:icon="@drawable/ic_tune_24dp"-->
+<!--        app:showAsAction="ifRoom"/>-->
+</menu>

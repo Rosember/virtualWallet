@@ -20,15 +20,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppBase {
 
-    public static final String IP = "10.1.3.112";
-    public static final String BASE_URL_SERVICE ="http://"+IP+":8081/api/";
+    public static final String IP_1 = "10.1.3.102";
+    public static final String IP_2 = "10.1.3.104";
+    public static final String BASE_URL_SERVICE ="http://"+IP_2+":8081/api/";
     public static final String KEY_TOKEN = "token";
+    public static final String KEY_USER = "user_id";
     private static final String APP_PREFERENCE = "Wallets";
-    private static AppBase _INSTANCE = new AppBase();
-
-    public static AppBase getInstance() {
-        return _INSTANCE;
-    }
+//    private static AppBase _INSTANCE = new AppBase();
+//
+//    public static AppBase getInstance() {
+//        return _INSTANCE;
+//    }
 
     public static  <S> S crearServicio(Class<S> sClass,String baseUrl){
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
@@ -64,7 +66,7 @@ public class AppBase {
     /**
      * metodo para recuperar variables goblales de la aplicacion e.g. token.
      */
-    public String retrieveset(String name) {
+    public static String retrieveset(String name) {
         //retreive
         String res = "";
         Context c = Application.getAppContext();
@@ -77,7 +79,7 @@ public class AppBase {
      * metodo para guardar algunas variables globales token, usuario, etc.
      * Pensado para obtener valor de token y otros para los servicios.
      */
-    public void saveset(String key, String value) {
+    public static void saveset(String key, String value) {
         //store
         Context c = Application.getAppContext();
         SharedPreferences sharedPref = c.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE);
@@ -86,13 +88,13 @@ public class AppBase {
         editor.apply();
     }
 
-    public void clearAllSharedPreference() {
+    public static void clearAllSharedPreference() {
         Context c = Application.getAppContext();
         SharedPreferences settings = c.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE);
         settings.edit().clear().apply();
     }
 
-    public void removeKey(String key){
+    public static void removeKey(String key){
         Context c = Application.getAppContext();
         SharedPreferences mySPrefs = c.getSharedPreferences(APP_PREFERENCE,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySPrefs.edit();

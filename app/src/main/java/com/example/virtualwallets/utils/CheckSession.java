@@ -28,7 +28,7 @@ public class CheckSession extends AsyncTask<Object, Object, Boolean> {
     @Override
     protected Boolean doInBackground(Object... objects) {
         try {
-            String sessionDate = AppBase.getInstance().retrieveset(KEY_SESSION);
+            String sessionDate = AppBase.retrieveset(KEY_SESSION);
             if (sessionDate != null) {
                 Date today = Calendar.getInstance().getTime();
                 SimpleDateFormat dateFormatter = new SimpleDateFormat(YYYY_MM_DD_T_HH_MM_SS_SSS, Locale.US);

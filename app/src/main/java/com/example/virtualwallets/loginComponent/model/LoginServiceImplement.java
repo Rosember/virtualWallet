@@ -13,7 +13,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class LoginServiceImplement implements ILoginService {
+public class LoginServiceImplement implements ILoginPersistence {
 
     private final String TAG = getClass().getSimpleName();
 
@@ -24,7 +24,7 @@ public class LoginServiceImplement implements ILoginService {
     }
 
     @Override
-    public void performLogin(String user, String password) {
+    public void validateCredentials(String user, String password) {
         try {
             WalletApi api = AppBase.crearServicio(WalletApi.class, AppBase.BASE_URL_SERVICE);
             HashMap<String, String> map = new HashMap<>();
@@ -43,7 +43,7 @@ public class LoginServiceImplement implements ILoginService {
                         public void onNext(LoginResponse loginResponse) {
                             Log.d(TAG, "onResponse: " + loginResponse.getToken());
 
-                            AppBase.getInstance().saveset(AppBase.KEY_TOKEN, loginResponse.getToken());
+                            AppBase.saveset(AppBase.KEY_TOKEN, loginResponse.getToken());
                             presenter.onLoginSucces();
                         }
 
@@ -61,7 +61,7 @@ public class LoginServiceImplement implements ILoginService {
                     });
         }catch (Exception e){
             e.printStackTrace();
-            Log.d(TAG, "performLogin: ");
+            Log.d(TAG, "validateCredentials: ");
             presenter.onLoginInvalidCredentials();
         }
     }

@@ -3,14 +3,14 @@ package com.example.virtualwallets.loginComponent.presenter;
 import android.util.Patterns;
 
 
-import com.example.virtualwallets.loginComponent.model.ILoginService;
+import com.example.virtualwallets.loginComponent.model.ILoginPersistence;
 import com.example.virtualwallets.loginComponent.model.LoginServiceImplement;
 import com.example.virtualwallets.loginComponent.view.ILoginView;
 
 public class LoginPresenter implements ILoginPresenter{
 
     private ILoginView view;
-    private ILoginService login;
+    private ILoginPersistence login;
 
     public LoginPresenter(ILoginView view) {
         this.view = view;
@@ -23,7 +23,7 @@ public class LoginPresenter implements ILoginPresenter{
             return;
         }
 
-        login.performLogin(email, password);
+        login.validateCredentials(email, password);
 
     }
 
