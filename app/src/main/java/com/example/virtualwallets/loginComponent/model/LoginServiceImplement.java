@@ -20,6 +20,7 @@ public class LoginServiceImplement implements ILoginPersistence {
     private ILoginPresenter presenter;
 
     public LoginServiceImplement(ILoginPresenter presenter) {
+
         this.presenter = presenter;
     }
 
