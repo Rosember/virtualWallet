@@ -3,12 +3,14 @@ package com.example.virtualwallets.transactionComponent.view;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -19,6 +21,9 @@ import com.example.virtualwallets.transactionComponent.presenter.TransactionPres
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class TransactionWalletsView extends AppCompatActivity implements ITransactionWalletsView{
@@ -31,6 +36,9 @@ public class TransactionWalletsView extends AppCompatActivity implements ITransa
 
     private String numberAccount;
 
+    @BindView(R.id.toolbar_transaction)
+    public Toolbar toolbar;
+
     private TextView textView_NumberAccount;
     private TextView textView_balance;
 
@@ -40,13 +48,14 @@ public class TransactionWalletsView extends AppCompatActivity implements ITransa
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
-
-
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(R.string.title_transaction);
         }
+        toolbar.setNavigationOnClickListener(arrow-> onBackPressed());
 
         numberAccount = "2421560000562";
 

@@ -5,4 +5,5 @@ public interface ILoginView {
     void showLoginSuccessMessage();
     void showInvalidCredentialsMessage();
     void showNetworkErrorMessage();
+    void saveSession();
 }
