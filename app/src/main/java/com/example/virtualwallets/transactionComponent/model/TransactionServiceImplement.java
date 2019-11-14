@@ -29,7 +29,7 @@ public class TransactionServiceImplement implements ITransactionService {
             Date dateNew = dateFormat.parse(strDate);
 
             transactionList.add(new DaoTransaction(dateNew, "Angel Beats", 230));
-            transactionList.add(new DaoTransaction(dateNew, "Death Note", 456));
+            transactionList.add(new DaoTransaction(dateNew, "Death Note", -456));
             transactionList.add(new DaoTransaction(dateNew, "Fate Stay Night", 342));
             transactionList.add(new DaoTransaction(dateNew, "Welcome to the NHK", 645));
             transactionList.add(new DaoTransaction(dateNew, "Suzumiya Haruhi", 459));

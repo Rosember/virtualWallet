@@ -13,8 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.virtualwallets.AppBase;
 import com.example.virtualwallets.mainComponent.view.MainActivity;
 import com.example.virtualwallets.R;
-import com.example.virtualwallets.loginComponent.model.Login;
-import com.example.virtualwallets.loginComponent.model.LoginServiceImplement;
 import com.example.virtualwallets.loginComponent.presenter.LoginPresenter;
 import com.example.virtualwallets.utils.CheckSession;
 
@@ -26,7 +24,6 @@ import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import com.example.virtualwallets.transactionComponent.view.TransactionWalletsView;
 
 public class LoginActivity extends AppCompatActivity implements ILoginView {
 
@@ -56,9 +53,12 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     @Override
     public void showLoginSuccessMessage() {
         String welcome = getString(R.string.welcome);
-//        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-//        Intent i = new Intent(LoginActivity.this, TransactionWalletsView.class);
-//        startActivity(i);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+            }
+        });
 //        this.finish();
         saveSession();
     }
@@ -66,14 +66,25 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     @Override
     public void showInvalidCredentialsMessage() {
         String invalidCredential = getString(R.string.login_failed);
-//        Toast.makeText(getBaseContext(), invalidCredential, Toast.LENGTH_LONG).show();
-        Log.d("LoginActivity", "showInvalidCredentialsMessage: error");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getBaseContext(), invalidCredential, Toast.LENGTH_LONG).show();
+            }
+        });
+        Log.d("LoginActivity", "showInvalidCredentialsMessage: " +invalidCredential);
     }
 
     @Override
     public void showNetworkErrorMessage() {
         String networkError = getString(R.string.network_error);
-//        Toast.makeText(getApplicationContext(), networkError, Toast.LENGTH_LONG).show();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), networkError, Toast.LENGTH_LONG).show();
+            }
+        });
+        Log.d("LoginActivity", "showNetworkErrorMessage: " +networkError );
     }
 
     @Override

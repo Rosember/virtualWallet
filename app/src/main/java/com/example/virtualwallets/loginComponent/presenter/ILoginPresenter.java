@@ -6,5 +6,6 @@ package com.example.virtualwallets.loginComponent.presenter;
  */
 public interface ILoginPresenter {
     void onLoginSucces();
-    void onLoginError();
+    void onLoginInvalidCredentials();
+    void onNetworkError();
 }

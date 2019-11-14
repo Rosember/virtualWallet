@@ -13,18 +13,19 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class LoginServiceImplement implements ILoginService {
+public class LoginServiceImplement implements ILoginPersistence {
 
     private final String TAG = getClass().getSimpleName();
 
     private ILoginPresenter presenter;
 
     public LoginServiceImplement(ILoginPresenter presenter) {
+
         this.presenter = presenter;
     }
 
     @Override
-    public void performLogin(String user, String password) {
+    public void validateCredentials(String user, String password) {
         try {
             WalletApi api = AppBase.crearServicio(WalletApi.class, AppBase.BASE_URL_SERVICE);
             HashMap<String, String> map = new HashMap<>();
@@ -49,7 +50,9 @@ public class LoginServiceImplement implements ILoginService {
 
                         @Override
                         public void onError(Throwable e) {
-                            presenter.onLoginError();
+                            String mensaje = "Falla al conectar con el servicio";
+                            Log.d(TAG, mensaje + ". Detalle del error:"+ e.getMessage());
+                            presenter.onNetworkError();
                         }
 
                         @Override
@@ -59,8 +62,8 @@ public class LoginServiceImplement implements ILoginService {
                     });
         }catch (Exception e){
             e.printStackTrace();
-            Log.d(TAG, "performLogin: ");
-            presenter.onLoginError();
+            Log.d(TAG, "validateCredentials: ");
+            presenter.onLoginInvalidCredentials();
         }
     }
 }
