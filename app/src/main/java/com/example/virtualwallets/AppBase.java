@@ -26,6 +26,7 @@ public class AppBase {
     public static final String KEY_TOKEN = "token";
     public static final String KEY_USER = "user_id";
     private static final String APP_PREFERENCE = "Wallets";
+
 //    private static AppBase _INSTANCE = new AppBase();
 //
 //    public static AppBase getInstance() {
