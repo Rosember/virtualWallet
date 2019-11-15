@@ -29,4 +29,7 @@ public interface WalletApi {
 
     @GET("users/{user}/wallets")
     Observable<List<WalletsResponse>> listWallets(@Path("user") int userId, @Header("Authorization") String token);
+
+    @GET("wallets/{wallet_id}/transactions")
+    Observable<List<WalletsResponse>> listTransactions(@Path("wallet_id") int wallet_id, @Header("Authorization") String token);
 }

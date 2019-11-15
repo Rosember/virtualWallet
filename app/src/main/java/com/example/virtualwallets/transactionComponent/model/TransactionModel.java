@@ -7,16 +7,15 @@ public class TransactionModel {
     private ITransactionService iTransactionService;
 
     public TransactionModel(ITransactionService iTransactionService) {
+
         this.iTransactionService = iTransactionService;
     }
 
-    public List<DaoTransaction> geTransactions(String numberAccount){
-        List<DaoTransaction> transactionList =  iTransactionService.getTransaction(numberAccount);
-        return  transactionList;
+    public void geTransactions(String numberAccount){
+        iTransactionService.getTransaction(numberAccount);
     }
 
-    public Double getCurrentBalance(String numberAccount) {
-        double currentBalance = iTransactionService.getCurrentBalanceByNumberAccount(numberAccount);
-        return currentBalance;
+    public void getCurrentBalance(String numberAccount) {
+        iTransactionService.getCurrentBalanceByNumberAccount(numberAccount);
     }
 }

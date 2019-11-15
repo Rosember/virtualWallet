@@ -57,7 +57,8 @@ public class TransactionWalletsView extends AppCompatActivity implements ITransa
         }
         toolbar.setNavigationOnClickListener(arrow-> onBackPressed());
 
-        numberAccount = "2421560000562";
+        String numeroCuenta = getIntent().getExtras().getString("numeroCuenta");
+        numberAccount = numeroCuenta;
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
 

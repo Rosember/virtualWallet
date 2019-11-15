@@ -3,6 +3,10 @@ package com.example.virtualwallets.transactionComponent.model;
 import android.util.Log;
 
 import com.example.virtualwallets.AppBase;
+import com.example.virtualwallets.transactionComponent.presenter.IBalancePresenter;
+import com.example.virtualwallets.transactionComponent.presenter.ITransactionPresenter;
+import com.example.virtualwallets.transactionComponent.presenter.TransactionPresenter;
+import com.example.virtualwallets.transactionComponent.view.TransactionWalletsView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,8 +19,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TransactionServiceImplement implements ITransactionService {
 
+    private final String TAG = getClass().getSimpleName();
+
+    private IBalancePresenter balancePresenter;
+    private ITransactionPresenter transactionPresenter;
+
+    public TransactionServiceImplement(IBalancePresenter balancePresenter, ITransactionPresenter transactionPresenter){
+        this.balancePresenter= balancePresenter;
+        this.transactionPresenter = transactionPresenter;
+    }
+
     @Override
-    public List<DaoTransaction> getTransaction(String numberAccount) {
+    public void getTransaction(String numberAccount) {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(AppBase.BASE_URL_SERVICE)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build() ;
@@ -37,15 +51,18 @@ public class TransactionServiceImplement implements ITransactionService {
             Log.v("Exception", ex.getLocalizedMessage());
         }
 
-        return transactionList;
+
+
     }
 
     @Override
-    public double getCurrentBalanceByNumberAccount(String numberAccount) {
+    public void getCurrentBalanceByNumberAccount(String numberAccount) {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(AppBase.BASE_URL_SERVICE)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build() ;
 
-        return 954.52;
+         //IBalancePresenter balancePresenter= new TransactionPresenter(new TransactionWalletsView());
+         //balancePresenter.currentBalance(954.25);
+
     }
 }
