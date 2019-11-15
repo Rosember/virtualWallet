@@ -1,5 +1,7 @@
 package com.example.virtualwallets.transferComponent.model;
 
+import android.util.Log;
+
 import com.example.virtualwallets.AppBase;
 import com.example.virtualwallets.utils.OnServiceResponse;
 import com.example.virtualwallets.utils.WalletApi;
@@ -18,9 +20,11 @@ import retrofit2.Response;
  */
 public class TransferServiceImplement implements ITransferService {
 
-    private OnServiceResponse servicio;
+    private final String TAG = getClass().getSimpleName();
 
-    public TransferServiceImplement(OnServiceResponse servicio) {
+    private OnServiceResponse<String> servicio;
+
+    public TransferServiceImplement(OnServiceResponse<String> servicio) {
         this.servicio = servicio;
     }
 
@@ -33,7 +37,11 @@ public class TransferServiceImplement implements ITransferService {
             callback.enqueue(new Callback<TransferResponse>() {
                 @Override
                 public void onResponse(Call<TransferResponse> call, Response<TransferResponse> response) {
-                    servicio.onComplet(true);
+                    Log.d(TAG, "onResponse: "+response.body());
+                    if (response.body()!=null)
+                        servicio.onComplet("1");
+                    else
+                        servicio.onError();
                 }
 
                 @Override
