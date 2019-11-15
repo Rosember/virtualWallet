@@ -1,7 +1,6 @@
 package com.example.virtualwallets.mainComponent.view;
 
-import com.example.virtualwallets.POJOS.Wallets;
-import com.example.virtualwallets.mainComponent.model.WalletsResponse;
+import com.example.virtualwallets.transferComponent.model.Wallets;
 
 import java.util.List;
 

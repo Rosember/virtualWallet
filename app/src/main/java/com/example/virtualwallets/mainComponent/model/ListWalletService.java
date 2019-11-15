@@ -1,12 +1,11 @@
 package com.example.virtualwallets.mainComponent.model;
 
 import com.example.virtualwallets.AppBase;
-import com.example.virtualwallets.POJOS.Wallets;
-import com.example.virtualwallets.mainComponent.presenter.IMainPresenter;
+import com.example.virtualwallets.transferComponent.model.Wallets;
+import com.example.virtualwallets.utils.OnServiceResponse;
 import com.example.virtualwallets.utils.WalletApi;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -19,14 +18,14 @@ import io.reactivex.schedulers.Schedulers;
  * @autor Ing. Carlos G. Cruz Andia
  * Creado el 2019-11-12
  */
-public class MainModel implements IMainModel{
+public class ListWalletService implements IListWalletService {
 
-    private IMainPresenter presenter;
+    private OnServiceResponse<List<Wallets>> serviceResponse;
     private Disposable disposable;
     WalletApi api;
 
-    public MainModel(IMainPresenter presenter) {
-        this.presenter = presenter;
+    public ListWalletService(OnServiceResponse response) {
+        this.serviceResponse = response;
         this.disposable = new CompositeDisposable();
     }
 
@@ -52,7 +51,7 @@ public class MainModel implements IMainModel{
                             for (WalletsResponse w : walletsResponses){
                                 list.add(new Wallets(w.getId(),w.getWalletNumber(),w.getBalance()));
                             }
-                            presenter.onLoadWalletsSuccess(list);
+                            serviceResponse.onComplet(list);
                         }
 
                         @Override
@@ -70,39 +69,7 @@ public class MainModel implements IMainModel{
         }
     }
 
-    @Override
-    public void logout() {
-        String token = AppBase.retrieveset(AppBase.KEY_TOKEN);
-        String userId = AppBase.retrieveset(AppBase.KEY_USER);
-        HashMap<String, String> map = new HashMap<>();
-        map.put("user_id",userId);
-        api = AppBase.crearServicio(WalletApi.class,AppBase.BASE_URL_SERVICE);
-        api.logout("Bearer "+token,map)
-        .observeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Observer<Boolean>() {
-            @Override
-            public void onSubscribe(Disposable d) {
 
-            }
-
-            @Override
-            public void onNext(Boolean aBoolean) {
-                if (aBoolean) presenter.onLogoutSucces();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
-
-    }
 
     @Override
     public void onResume() {

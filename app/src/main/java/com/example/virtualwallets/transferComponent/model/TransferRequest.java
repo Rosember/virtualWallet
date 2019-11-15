@@ -15,7 +15,7 @@ public class TransferRequest {
     private String responsiblePersonName;
     @SerializedName("transaction_amount")
     @Expose
-    private Integer transactionAmount;
+    private Double transactionAmount;
     @SerializedName("transaction_type")
     @Expose
     private String transactionType;
@@ -34,11 +34,11 @@ public class TransferRequest {
         this.responsiblePersonName = responsiblePersonName;
     }
 
-    public Integer getTransactionAmount() {
+    public Double getTransactionAmount() {
         return transactionAmount;
     }
 
-    public void setTransactionAmount(Integer transactionAmount) {
+    public void setTransactionAmount(Double transactionAmount) {
         this.transactionAmount = transactionAmount;
     }
 

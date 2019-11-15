@@ -3,6 +3,8 @@ package com.example.virtualwallets.utils;
 import com.example.virtualwallets.loginComponent.model.LoginResponse;
 import com.example.virtualwallets.loginComponent.model.LogoutResponse;
 import com.example.virtualwallets.mainComponent.model.WalletsResponse;
+import com.example.virtualwallets.transferComponent.model.TransferRequest;
+import com.example.virtualwallets.transferComponent.model.TransferResponse;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,4 +31,7 @@ public interface WalletApi {
 
     @GET("users/{user}/wallets")
     Observable<List<WalletsResponse>> listWallets(@Path("user") int userId, @Header("Authorization") String token);
+
+    @POST("transactions")
+    Call<TransferResponse> transfer(@Header("Authorization") String token,@Body TransferRequest request);
 }

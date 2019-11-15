@@ -1,4 +1,4 @@
-package com.example.virtualwallets.POJOS;
+package com.example.virtualwallets.transferComponent.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -20,6 +20,28 @@ public class Wallets implements Parcelable {
         this.nombre = nombre;
         this.saldo = saldo;
     }
+
+    protected Wallets(Parcel in) {
+        id = in.readInt();
+        nombre = in.readString();
+        if (in.readByte() == 0) {
+            saldo = null;
+        } else {
+            saldo = in.readDouble();
+        }
+    }
+
+    public static final Creator<Wallets> CREATOR = new Creator<Wallets>() {
+        @Override
+        public Wallets createFromParcel(Parcel in) {
+            return new Wallets(in);
+        }
+
+        @Override
+        public Wallets[] newArray(int size) {
+            return new Wallets[size];
+        }
+    };
 
     public int getId() {
         return id;
