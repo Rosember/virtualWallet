@@ -15,10 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.virtualwallets.AppBase;
-import com.example.virtualwallets.POJOS.Wallets;
+import com.example.virtualwallets.transferComponent.model.Wallets;
 import com.example.virtualwallets.R;
 import com.example.virtualwallets.loginComponent.view.LoginActivity;
-import com.example.virtualwallets.mainComponent.model.WalletsResponse;
 import com.example.virtualwallets.mainComponent.presenter.IMainPresenter;
 import com.example.virtualwallets.mainComponent.presenter.MainPresenter;
 import com.example.virtualwallets.transactionComponent.view.TransactionWalletsView;
@@ -27,7 +26,6 @@ import com.example.virtualwallets.utils.OnItemRecyclerViewClickListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
     private IMainPresenter presenter;
     private List<Wallets> listWallet;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setTitle("Wallet");
+
+
     }
 
     private void setupRecyclerView() {
@@ -79,8 +80,8 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
         recyclerView.setAdapter(adapter);
         refreshLayout.setColorSchemeResources(R.color.md_indigo_500, R.color.md_red_500, R.color.md_orange_500);
         refreshLayout.setOnRefreshListener(() -> onLoad());
-        onLoad();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.menu_main_logout:
                 logout();
                 break;
@@ -109,7 +110,9 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
     protected void onResume() {
         super.onResume();
         presenter.onResume();
+        onLoad();
     }
+
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
@@ -143,6 +146,10 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
 
     @Override
     public void onLoad() {
+        if (listWallet.size()>0){
+            listWallet.clear();
+            adapter.notifyDataSetChanged();
+        }
         onStartRefreshSwipeWallet();
         presenter.onLoadWallets();
     }
@@ -150,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
     @Override
     public void onLoadSuccess(List<Wallets> wallets) {
         onStopRefreshSwipeWallet();
-        if (listWallet.size()>0){
+        if (listWallet.size() > 0) {
             listWallet.clear();
         }
         listWallet.addAll(wallets);
