@@ -164,8 +164,8 @@ public class WalletView extends AppCompatActivity implements IWalletView, OnItem
     public void onLoadSuccess(List<Wallets> wallets) {
         Log.d(TAG, "onLoadSuccess: "+wallets.toString());
         this.listWallet.addAll(wallets);
-        this.adapter.notifyDataSetChanged();
         onStopRefreshSwipeWallet();
+        this.adapter.notifyDataSetChanged();
 
     }
 
