@@ -35,6 +35,7 @@ public class TransactionWalletsView extends AppCompatActivity implements ITransa
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private String numberAccount;
+    private int walletID;
 
     @BindView(R.id.toolbar_transaction)
     public Toolbar toolbar;
@@ -58,21 +59,23 @@ public class TransactionWalletsView extends AppCompatActivity implements ITransa
         toolbar.setNavigationOnClickListener(arrow-> onBackPressed());
 
         String numeroCuenta = getIntent().getExtras().getString("numeroCuenta");
+        int idBilletera = getIntent().getExtras().getInt("idCuenta");
         numberAccount = numeroCuenta;
+        walletID = idBilletera;
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
 
         presenter = new TransactionPresenter(this);
-        presenter.getCurrentBalance(numberAccount);
-        presenter.getTransactions(numberAccount);
+        presenter.getCurrentBalance(walletID);
+        presenter.getTransactions(numberAccount,walletID);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 // Esto se ejecuta cada vez que se realiza el gesto
                 swipeRefreshLayout.setRefreshing(true);
-                presenter.getCurrentBalance(numberAccount);
-                presenter.getTransactions(numberAccount);
+                presenter.getCurrentBalance(walletID);
+                presenter.getTransactions(numberAccount,walletID);
                 swipeRefreshLayout.setRefreshing(false);
             }
         });

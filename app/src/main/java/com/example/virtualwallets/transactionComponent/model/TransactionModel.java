@@ -13,11 +13,11 @@ public class TransactionModel {
         this.iTransactionService = iTransactionService;
     }
 
-    public void geTransactions(String numberAccount , OnServiceResponse<List<DaoTransaction>> response ){
-        iTransactionService.getTransaction(numberAccount , response);
+    public void geTransactions(String numberAccount , int wallet_id, OnServiceResponse<List<DaoTransaction>> response ){
+        iTransactionService.getTransaction(numberAccount , wallet_id , response);
     }
 
-    public void getCurrentBalance(String numberAccount, OnServiceResponse<Double> response) {
-        iTransactionService.getCurrentBalanceByNumberAccount(numberAccount, response);
+    public void getCurrentBalance(int wallet_id, OnServiceResponse<Double> response) {
+        iTransactionService.getCurrentBalanceByNumberAccount(wallet_id, response);
     }
 }

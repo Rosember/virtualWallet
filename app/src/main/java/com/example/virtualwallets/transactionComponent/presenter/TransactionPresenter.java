@@ -18,8 +18,8 @@ public class TransactionPresenter  {
         transactionModel = new TransactionModel(new TransactionServiceImplement());
     }
 
-    public void getTransactions(String numberAccount) {
-        transactionModel.geTransactions(numberAccount , new OnServiceResponse<List<DaoTransaction>>(){
+    public void getTransactions(String numberAccount, int wallet_id) {
+        transactionModel.geTransactions(numberAccount , wallet_id,  new OnServiceResponse<List<DaoTransaction>>(){
 
             @Override
             public void onComplet(List<DaoTransaction> result) {
@@ -47,8 +47,8 @@ public class TransactionPresenter  {
         });
     }
 
-    public void getCurrentBalance(String numberAccount) {
-        transactionModel.getCurrentBalance(numberAccount, new OnServiceResponse<Double>() {
+    public void getCurrentBalance(int wallet_id) {
+        transactionModel.getCurrentBalance(wallet_id, new OnServiceResponse<Double>() {
             @Override
             public void onComplet(Double result) {
                 iTransactionWalletsView.showCurrentBalance(result);
