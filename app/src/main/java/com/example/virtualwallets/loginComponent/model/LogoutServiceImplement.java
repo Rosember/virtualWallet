@@ -11,6 +11,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * @autor Ing. Carlos G. Cruz Andia
@@ -18,12 +21,12 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class LogoutServiceImplement implements ILogoutService{
 
-    private OnServiceResponse response;
+    private OnServiceResponse serviceResponse;
     public CompositeDisposable disposable;
     WalletApi api;
 
     public LogoutServiceImplement(OnServiceResponse response) {
-        this.response = response;
+        this.serviceResponse = response;
         this.disposable = new CompositeDisposable();
 
     }
@@ -35,29 +38,20 @@ public class LogoutServiceImplement implements ILogoutService{
         HashMap<String, String> map = new HashMap<>();
         map.put("user_id",userId);
         api = AppBase.crearServicio(WalletApi.class,AppBase.BASE_URL_SERVICE);
-        api.logout(token,map)
-                .observeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Boolean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        disposable.add(d);
-                    }
 
-                    @Override
-                    public void onNext(Boolean aBoolean) {
-                        if (aBoolean) response.onComplet(true);
-                    }
+        Call<Boolean> callBack = api.logout(token,map);
+        callBack.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Boolean b = response.body();
+                if (b!=null) serviceResponse.onComplet(true);
+            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        response.onError();
-                    }
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                serviceResponse.onError();
+            }
+        });
 
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
     }
 }

@@ -12,6 +12,9 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginServiceImplement implements ILoginPersistence {
 
@@ -31,36 +34,26 @@ public class LoginServiceImplement implements ILoginPersistence {
             HashMap<String, String> map = new HashMap<>();
             map.put("email", user);
             map.put("password", password);
-            api.loginSession(map)
-                    .subscribeOn(Schedulers.io())
-                    .subscribeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<LoginResponse>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
+            Call<LoginResponse> callBack = api.loginSession(map);
+            callBack.enqueue(new Callback<LoginResponse>() {
+                @Override
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    LoginResponse loginResponse = response.body();
+                    if (loginResponse!= null) {
+                        Log.d(TAG, "onResponse: " + loginResponse.getToken());
 
-                        }
+                        AppBase.saveset(AppBase.KEY_TOKEN, "Bearer " + loginResponse.getToken());
+                        AppBase.saveset(AppBase.KEY_USER, "" + loginResponse.getUser().getId());
+                        presenter.onLoginSucces();
+                    }else
+                        presenter.onLoginInvalidCredentials();
+                }
 
-                        @Override
-                        public void onNext(LoginResponse loginResponse) {
-                            Log.d(TAG, "onResponse: " + loginResponse.getToken());
-
-                            AppBase.saveset(AppBase.KEY_TOKEN, "Bearer "+loginResponse.getToken());
-                            AppBase.saveset(AppBase.KEY_USER, ""+loginResponse.getUser().getId());
-                            presenter.onLoginSucces();
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            String mensaje = "Falla al conectar con el servicio";
-                            Log.d(TAG, mensaje + ". Detalle del error:"+ e.getMessage());
-                            presenter.onNetworkError();
-                        }
-
-                        @Override
-                        public void onComplete() {
-
-                        }
-                    });
+                @Override
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    presenter.onNetworkError();
+                }
+            });
         }catch (Exception e){
             e.printStackTrace();
             Log.d(TAG, "validateCredentials: ");

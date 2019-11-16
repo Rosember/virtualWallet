@@ -80,6 +80,8 @@ public class WalletView extends AppCompatActivity implements IWalletView, OnItem
         recyclerView.setAdapter(adapter);
         refreshLayout.setColorSchemeResources(R.color.md_indigo_500, R.color.md_red_500, R.color.md_orange_500);
         refreshLayout.setOnRefreshListener(() -> onLoad());
+        onLoad();
+
     }
 
     @Override
@@ -109,7 +111,6 @@ public class WalletView extends AppCompatActivity implements IWalletView, OnItem
     @Override
     protected void onResume() {
         super.onResume();
-        onLoad();
     }
 
     @Override
@@ -152,17 +153,18 @@ public class WalletView extends AppCompatActivity implements IWalletView, OnItem
     @Override
     public void onLoad() {
         onStartRefreshSwipeWallet();
-        if (this.listWallet.size()>0){
-            this.listWallet.clear();
-            this.listWallet = new ArrayList<>();
-        }
-        this.adapter.notifyDataSetChanged();
         presenter.onLoadWallets();
     }
 
     @Override
     public void onLoadSuccess(List<Wallets> wallets) {
         Log.d(TAG, "onLoadSuccess: "+wallets.toString());
+        if (wallets.size()>0){
+            Log.d(TAG, "onLoadSuccess: tamano "+wallets.size());
+        }
+        if (this.listWallet.size()>0){
+            this.listWallet.clear();
+        }
         this.listWallet.addAll(wallets);
         onStopRefreshSwipeWallet();
         this.adapter.notifyDataSetChanged();

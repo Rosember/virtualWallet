@@ -1,5 +1,6 @@
 package com.example.virtualwallets.walletComponent.model;
 
+
 import com.example.virtualwallets.AppBase;
 import com.example.virtualwallets.transferComponent.model.Wallets;
 import com.example.virtualwallets.utils.OnServiceResponse;
@@ -13,6 +14,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * @autor Ing. Carlos G. Cruz Andia
@@ -35,36 +39,28 @@ public class ListWalletService implements IListWalletService {
             String token = AppBase.retrieveset(AppBase.KEY_TOKEN);
             String userId = AppBase.retrieveset(AppBase.KEY_USER);
             api = AppBase.crearServicio(WalletApi.class, AppBase.BASE_URL_SERVICE);
-            api.listWallets(Integer.parseInt(userId),  token)
-                    .subscribeOn(Schedulers.io())
-                    .subscribeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<List<WalletsResponse>>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-
+            Call<List<WalletsResponse>> callback = api.listWallets(Integer.parseInt(userId),token);
+            callback.enqueue(new Callback<List<WalletsResponse>>() {
+                @Override
+                public void onResponse(Call<List<WalletsResponse>> call, Response<List<WalletsResponse>> response) {
+                    List<Wallets> list = new ArrayList<>();
+                    List<WalletsResponse> walletsResponses = response.body();
+                    if (walletsResponses != null) {
+                        for (WalletsResponse w : walletsResponses) {
+                            list.add(new Wallets(w.getId(), w.getWalletNumber(), w.getBalance()));
                         }
+                        serviceResponse.onComplet(list);
+                    }
+                }
 
-                        @Override
-                        public void onNext(List<WalletsResponse> walletsResponses) {
-                            List<Wallets> list = new ArrayList<>();
-                            for (WalletsResponse w : walletsResponses){
-                                list.add(new Wallets(w.getId(),w.getWalletNumber(),w.getBalance()));
-                            }
-                            serviceResponse.onComplet(list);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-
-                        @Override
-                        public void onComplete() {
-
-                        }
-                    });
+                @Override
+                public void onFailure(Call<List<WalletsResponse>> call, Throwable t) {
+                    serviceResponse.onError();
+                }
+            });
         }catch (Exception ex){
             ex.printStackTrace();
+            serviceResponse.onError();
         }
     }
 
