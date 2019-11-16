@@ -66,7 +66,7 @@ public class TransactionWalletsView extends AppCompatActivity implements ITransa
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
 
         presenter = new TransactionPresenter(this);
-        presenter.getCurrentBalance(walletID);
+        presenter.getCurrentBalance(numberAccount, walletID);
         presenter.getTransactions(numberAccount,walletID);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -74,7 +74,7 @@ public class TransactionWalletsView extends AppCompatActivity implements ITransa
             public void onRefresh() {
                 // Esto se ejecuta cada vez que se realiza el gesto
                 swipeRefreshLayout.setRefreshing(true);
-                presenter.getCurrentBalance(walletID);
+                presenter.getCurrentBalance(numberAccount, walletID);
                 presenter.getTransactions(numberAccount,walletID);
                 swipeRefreshLayout.setRefreshing(false);
             }

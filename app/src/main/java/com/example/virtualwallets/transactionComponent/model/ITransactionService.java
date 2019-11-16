@@ -8,5 +8,5 @@ public interface ITransactionService {
 
     void getTransaction (String numberAccount, int wallet_id, OnServiceResponse<List<DaoTransaction>> response);
 
-    void getCurrentBalanceByNumberAccount(int wallet_id, OnServiceResponse<Double> response);
+    void getCurrentBalanceByNumberAccount(String numberAccount,int wallet_id, OnServiceResponse<Double> response);
 }

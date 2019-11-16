@@ -17,7 +17,7 @@ public class TransactionModel {
         iTransactionService.getTransaction(numberAccount , wallet_id , response);
     }
 
-    public void getCurrentBalance(int wallet_id, OnServiceResponse<Double> response) {
-        iTransactionService.getCurrentBalanceByNumberAccount(wallet_id, response);
+    public void getCurrentBalance( String numberAccount, int wallet_id, OnServiceResponse<Double> response) {
+        iTransactionService.getCurrentBalanceByNumberAccount( numberAccount, wallet_id, response);
     }
 }

@@ -35,7 +35,7 @@ public interface WalletApi {
     Observable<List<WalletsResponse>> listWallets(@Path("user") int userId, @Header("Authorization") String token);
 
     @GET("wallets/{wallet_id}/transactions")
-    Observable<List<TransactionResponse>> listTransactions(@Path("wallet_id") int wallet_id, @Header("Authorization") String token);
+    Call<List<TransactionResponse>> listTransactions(@Path("wallet_id") int wallet_id, @Header("Authorization") String token);
 
     @POST("transactions")
     Call<TransferResponse> transfer(@Header("Authorization") String token,@Body TransferRequest request);

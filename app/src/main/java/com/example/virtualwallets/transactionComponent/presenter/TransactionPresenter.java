@@ -47,8 +47,8 @@ public class TransactionPresenter  {
         });
     }
 
-    public void getCurrentBalance(int wallet_id) {
-        transactionModel.getCurrentBalance(wallet_id, new OnServiceResponse<Double>() {
+    public void getCurrentBalance(String numberAccount, int wallet_id) {
+        transactionModel.getCurrentBalance(numberAccount, wallet_id, new OnServiceResponse<Double>() {
             @Override
             public void onComplet(Double result) {
                 iTransactionWalletsView.showCurrentBalance(result);
