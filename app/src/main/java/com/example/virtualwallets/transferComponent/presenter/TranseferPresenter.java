@@ -2,11 +2,13 @@ package com.example.virtualwallets.transferComponent.presenter;
 
 import android.util.Log;
 
-import com.example.virtualwallets.mainComponent.model.ListWalletService;
+import com.example.virtualwallets.transferComponent.model.CheckWallet;
+import com.example.virtualwallets.transferComponent.model.ICheckWallet;
+import com.example.virtualwallets.walletComponent.model.ListWalletService;
 import com.example.virtualwallets.transferComponent.model.TransferRequest;
 import com.example.virtualwallets.transferComponent.model.Wallets;
 import com.example.virtualwallets.transferComponent.model.ITransferService;
-import com.example.virtualwallets.transferComponent.model.TransferServiceImplement;
+import com.example.virtualwallets.transferComponent.model.TransferService;
 import com.example.virtualwallets.transferComponent.view.ITransferView;
 import com.example.virtualwallets.utils.OnServiceResponse;
 
@@ -24,7 +26,7 @@ public class TranseferPresenter implements ITransferPresenter, OnServiceResponse
 
     public TranseferPresenter(ITransferView view) {
         this.view = view;
-        this.model = new TransferServiceImplement(this);
+        this.model = new TransferService(this);
     }
 
 
@@ -35,7 +37,7 @@ public class TranseferPresenter implements ITransferPresenter, OnServiceResponse
             @Override
             public void onComplet(List<Wallets> result) {
                 Log.d(TAG, "onComplet: ");
-                view.onLoadMyWallet(result);
+                view.onLoadListWallet(result);
             }
 
             @Override
@@ -51,13 +53,29 @@ public class TranseferPresenter implements ITransferPresenter, OnServiceResponse
     }
 
     @Override
-    public void onResume() {
+    public void onDestroy() {
 
     }
 
     @Override
+    public void findByNumberWallet(String number) {
+        ICheckWallet checkWallet = new CheckWallet();
+        checkWallet.findByNumberWallet(number, new OnServiceResponse<Integer>() {
+            @Override
+            public void onComplet(Integer result) {
+                view.onFoundNumber(result);
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+    }
+
+    @Override
     public void onComplet(Object result) {
-        view.onsuccess();
+        view.onSuccess();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.virtualwallets.mainComponent.view;
+package com.example.virtualwallets.walletComponent.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,8 +18,8 @@ import com.example.virtualwallets.AppBase;
 import com.example.virtualwallets.transferComponent.model.Wallets;
 import com.example.virtualwallets.R;
 import com.example.virtualwallets.loginComponent.view.LoginActivity;
-import com.example.virtualwallets.mainComponent.presenter.IMainPresenter;
-import com.example.virtualwallets.mainComponent.presenter.MainPresenter;
+import com.example.virtualwallets.walletComponent.presenter.IWalletPresenter;
+import com.example.virtualwallets.walletComponent.presenter.WalletPresenter;
 import com.example.virtualwallets.transactionComponent.view.TransactionWalletsView;
 import com.example.virtualwallets.transferComponent.view.TransferView;
 import com.example.virtualwallets.utils.OnItemRecyclerViewClickListener;
@@ -37,7 +37,7 @@ import butterknife.OnClick;
  * @autor Ing. Carlos G. Cruz Andia
  * Creado el 2019-11-11
  */
-public class MainActivity extends AppCompatActivity implements IMainView, OnItemRecyclerViewClickListener {
+public class WalletView extends AppCompatActivity implements IWalletView, OnItemRecyclerViewClickListener {
 
 
     private final String TAG = getClass().getSimpleName();
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
     public SwipeRefreshLayout refreshLayout;
 
     private AdapterMainRecyclerView adapter;
-    private IMainPresenter presenter;
+    private IWalletPresenter presenter;
     private List<Wallets> listWallet;
 
 
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        presenter = new MainPresenter(this);
+        presenter = new WalletPresenter(this);
         setupRecyclerView();
         setSupportActionBar(toolbar);
 
@@ -109,8 +109,13 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.onResume();
         onLoad();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
     }
 
     @Override
@@ -121,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
     @Override
     public void itemClick(Object o, int pos) {
         Log.d(TAG, "itemClick: mainActivity ");
-        Intent i = new Intent(MainActivity.this, TransactionWalletsView.class);
+        Intent i = new Intent(WalletView.this, TransactionWalletsView.class);
         Wallets wallets = (Wallets) o;
         i.putExtra("numeroCuenta", wallets.getNombre());
         i.putExtra("idCuenta", wallets.getId());
@@ -137,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
     @Override
     public void logoutSuccess() {
         AppBase.clearAllSharedPreference();
-        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+        Intent i = new Intent(WalletView.this, LoginActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -146,27 +151,26 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
 
     @Override
     public void onLoad() {
-        if (listWallet.size()>0){
-            listWallet.clear();
-            adapter.notifyDataSetChanged();
-        }
         onStartRefreshSwipeWallet();
+        if (this.listWallet.size()>0){
+            this.listWallet.clear();
+            this.listWallet = new ArrayList<>();
+        }
+        this.adapter.notifyDataSetChanged();
         presenter.onLoadWallets();
     }
 
     @Override
     public void onLoadSuccess(List<Wallets> wallets) {
+        Log.d(TAG, "onLoadSuccess: "+wallets.toString());
+        this.listWallet.addAll(wallets);
+        this.adapter.notifyDataSetChanged();
         onStopRefreshSwipeWallet();
-        if (listWallet.size() > 0) {
-            listWallet.clear();
-        }
-        listWallet.addAll(wallets);
-        adapter.notifyDataSetChanged();
+
     }
 
     @Override
     public void onStopRefreshSwipeWallet() {
-//        adapter.notifyDataSetChanged();
         refreshLayout.setRefreshing(false);
 
     }

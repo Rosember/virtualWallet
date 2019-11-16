@@ -1,10 +1,6 @@
-package com.example.virtualwallets.mainComponent;
+package com.example.virtualwallets.walletComponent;
 
 import android.content.Context;
-import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * @autor Ing. Carlos G. Cruz Andia

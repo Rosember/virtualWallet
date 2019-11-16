@@ -1,4 +1,4 @@
-package com.example.virtualwallets.mainComponent.view;
+package com.example.virtualwallets.walletComponent.view;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,13 +32,7 @@ public class AdapterMainRecyclerView extends RecyclerView.Adapter<AdapterMainRec
         this.list = walletsList;
         Log.d(TAG, "AdapterMainRecyclerView: ");
     }
-
-//    @NonNull
-//    @Override
-//    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        return new RecyclerViewMain(LayoutInflater.from(parent.getContext()),parent,listener);
-//    }
-
+    
     @NonNull
     @Override
     public RecyclerViewMain onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,11 +43,6 @@ public class AdapterMainRecyclerView extends RecyclerView.Adapter<AdapterMainRec
     public void onBindViewHolder(@NonNull RecyclerViewMain holder, int position) {
         holder.bind(list.get(position));
     }
-
-//    @Override
-//    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-//        ((RecyclerViewMain) holder).bind(list.get(position));
-//    }
 
     @Override
     public int getItemCount() {

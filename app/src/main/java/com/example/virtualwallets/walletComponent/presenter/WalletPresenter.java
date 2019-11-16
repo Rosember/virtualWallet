@@ -1,10 +1,10 @@
-package com.example.virtualwallets.mainComponent.presenter;
+package com.example.virtualwallets.walletComponent.presenter;
 
 import com.example.virtualwallets.transferComponent.model.Wallets;
 import com.example.virtualwallets.loginComponent.model.LogoutServiceImplement;
-import com.example.virtualwallets.mainComponent.model.IListWalletService;
-import com.example.virtualwallets.mainComponent.model.ListWalletService;
-import com.example.virtualwallets.mainComponent.view.IMainView;
+import com.example.virtualwallets.walletComponent.model.IListWalletService;
+import com.example.virtualwallets.walletComponent.model.ListWalletService;
+import com.example.virtualwallets.walletComponent.view.IWalletView;
 import com.example.virtualwallets.utils.OnServiceResponse;
 
 import java.util.List;
@@ -13,20 +13,20 @@ import java.util.List;
  * @autor Ing. Carlos G. Cruz Andia
  * Creado el 2019-11-11
  */
-public class MainPresenter implements IMainPresenter, OnServiceResponse<List<Wallets>> {
+public class WalletPresenter implements IWalletPresenter, OnServiceResponse<List<Wallets>> {
 
-    private IMainView view;
+    private IWalletView view;
     private IListWalletService model;
 
-    public MainPresenter(IMainView view) {
+    public WalletPresenter(IWalletView view) {
         this.view = view;
         this.model = new ListWalletService(this);
 
     }
 
     @Override
-    public void onResume() {
-        model.onResume();
+    public void onDestroy() {
+        model.onDestroy();
     }
 
     @Override

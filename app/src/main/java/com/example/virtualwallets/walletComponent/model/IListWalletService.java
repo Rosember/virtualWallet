@@ -1,4 +1,4 @@
-package com.example.virtualwallets.mainComponent.model;
+package com.example.virtualwallets.walletComponent.model;
 
 /**
  * @autor Ing. Carlos G. Cruz Andia
@@ -6,5 +6,5 @@ package com.example.virtualwallets.mainComponent.model;
  */
 public interface IListWalletService {
     void onLoadWallets();
-    void onResume();
+    void onDestroy();
 }

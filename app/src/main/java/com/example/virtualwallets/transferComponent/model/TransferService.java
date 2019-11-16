@@ -14,13 +14,13 @@ import retrofit2.Response;
  * @autor Ing. Carlos G. Cruz Andia
  * Creado el 2019-11-13
  */
-public class TransferServiceImplement implements ITransferService {
+public class TransferService implements ITransferService {
 
     private final String TAG = getClass().getSimpleName();
 
     private OnServiceResponse<String> servicio;
 
-    public TransferServiceImplement(OnServiceResponse<String> servicio) {
+    public TransferService(OnServiceResponse<String> servicio) {
         this.servicio = servicio;
     }
 
@@ -50,5 +50,10 @@ public class TransferServiceImplement implements ITransferService {
             e.printStackTrace();
             servicio.onError();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+
     }
 }

@@ -1,29 +1,32 @@
-package com.example.virtualwallets.mainComponent.model;
-
+package com.example.virtualwallets.transferComponent.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * @autor Ing. Carlos G. Cruz Andia
- * Creado el 2019-11-14
+ * Creado el 2019-11-16
  */
-public class WalletsResponse {
+
+public class WalletResponse {
 
     @SerializedName("id")
     @Expose
-    public int id;
+    private Integer id;
     @SerializedName("walletNumber")
     @Expose
-    public String walletNumber;
+    private String walletNumber;
     @SerializedName("balance")
     @Expose
-    public Double balance;
+    private Double balance;
+    @SerializedName("user")
+    @Expose
+    private TransferResponse.User user;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -43,12 +46,11 @@ public class WalletsResponse {
         this.balance = balance;
     }
 
-    @Override
-    public String toString() {
-        return "WalletsResponse{" +
-                "id=" + id +
-                ", walletNumber='" + walletNumber + '\'' +
-                ", balance=" + balance +
-                '}';
+    public TransferResponse.User getUser() {
+        return user;
+    }
+
+    public void setUser(TransferResponse.User user) {
+        this.user = user;
     }
 }

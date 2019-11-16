@@ -4,7 +4,7 @@ package com.example.virtualwallets;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.virtualwallets.mainComponent.Application;
+import com.example.virtualwallets.walletComponent.Application;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;

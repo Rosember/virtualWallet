@@ -1,8 +1,10 @@
 package com.example.virtualwallets.utils;
 
 import com.example.virtualwallets.loginComponent.model.LoginResponse;
+import com.example.virtualwallets.transferComponent.model.WalletResponse;
+import com.example.virtualwallets.walletComponent.model.WalletsResponse;
 import com.example.virtualwallets.loginComponent.model.LogoutResponse;
-import com.example.virtualwallets.mainComponent.model.WalletsResponse;
+//import com.example.virtualwallets.mainComponent.model.WalletsResponse;
 import com.example.virtualwallets.transactionComponent.model.DaoTransaction;
 import com.example.virtualwallets.transactionComponent.model.TransactionResponse;
 import com.example.virtualwallets.transferComponent.model.TransferRequest;
@@ -34,9 +36,13 @@ public interface WalletApi {
     @GET("users/{user}/wallets")
     Observable<List<WalletsResponse>> listWallets(@Path("user") int userId, @Header("Authorization") String token);
 
+
     @GET("wallets/{wallet_id}/transactions")
     Call<List<TransactionResponse>> listTransactions(@Path("wallet_id") int wallet_id, @Header("Authorization") String token);
 
     @POST("transactions")
     Call<TransferResponse> transfer(@Header("Authorization") String token,@Body TransferRequest request);
+
+    @GET("wallets/by-number/{wallet_number_a}")
+    Call<WalletResponse> findByNumberWallet(@Path("wallet_number_a") String number,@Header("Authorization") String token);
 }

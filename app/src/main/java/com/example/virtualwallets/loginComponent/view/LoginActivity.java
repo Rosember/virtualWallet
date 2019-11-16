@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.virtualwallets.AppBase;
-import com.example.virtualwallets.mainComponent.view.MainActivity;
+import com.example.virtualwallets.walletComponent.view.WalletView;
 import com.example.virtualwallets.R;
 import com.example.virtualwallets.loginComponent.presenter.LoginPresenter;
 import com.example.virtualwallets.utils.CheckSession;
@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
             @Override
             public void onComplete() {
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                Intent i = new Intent(LoginActivity.this, WalletView.class);
                 startActivity(i);
             }
 

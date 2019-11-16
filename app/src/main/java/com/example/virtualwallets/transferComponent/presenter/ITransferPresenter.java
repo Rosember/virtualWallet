@@ -10,5 +10,6 @@ public interface ITransferPresenter {
 
     void onLoadWalletCombo();
     void sendTransfer(TransferRequest request);
-    void onResume();
+    void onDestroy();
+    void findByNumberWallet(String number);
 }
