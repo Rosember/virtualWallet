@@ -1,4 +1,4 @@
-package com.example.virtualwallets.mainComponent;
+package com.example.virtualwallets.walletComponent;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.virtualwallets.R;
 import com.example.virtualwallets.loginComponent.view.LoginActivity;
-import com.example.virtualwallets.mainComponent.presenter.IWalletSplashPresenter;
-import com.example.virtualwallets.mainComponent.presenter.WalletSplashPresenter;
-import com.example.virtualwallets.mainComponent.view.MainActivity;
+import com.example.virtualwallets.walletComponent.presenter.IWalletSplashPresenter;
+import com.example.virtualwallets.walletComponent.presenter.WalletSplashPresenter;
+import com.example.virtualwallets.walletComponent.view.WalletView;
 
 /**
  * @autor Ing. Carlos G. Cruz Andia
@@ -40,7 +40,7 @@ public class WalletSplashActivity extends AppCompatActivity implements IWalletSp
 
     @Override
     public void goToMainView() {
-        Intent i = new Intent(WalletSplashActivity.this, MainActivity.class);
+        Intent i = new Intent(WalletSplashActivity.this, WalletView.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK);

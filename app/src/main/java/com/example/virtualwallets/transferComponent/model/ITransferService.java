@@ -7,4 +7,5 @@ package com.example.virtualwallets.transferComponent.model;
 public interface ITransferService {
 
     void onTransfer(TransferRequest request);
+    void onDestroy();
 }

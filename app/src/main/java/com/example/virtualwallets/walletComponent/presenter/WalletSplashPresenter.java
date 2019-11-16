@@ -1,8 +1,8 @@
-package com.example.virtualwallets.mainComponent.presenter;
+package com.example.virtualwallets.walletComponent.presenter;
 
 import android.util.Log;
 
-import com.example.virtualwallets.mainComponent.IWalletSplashView;
+import com.example.virtualwallets.walletComponent.IWalletSplashView;
 import com.example.virtualwallets.utils.CheckSession;
 import com.example.virtualwallets.utils.OnTaskCompleted;
 

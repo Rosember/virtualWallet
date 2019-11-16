@@ -1,4 +1,4 @@
-package com.example.virtualwallets.mainComponent.view;
+package com.example.virtualwallets.walletComponent.view;
 
 import com.example.virtualwallets.transferComponent.model.Wallets;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * @autor Ing. Carlos G. Cruz Andia
  * Creado el 2019-11-11
  */
-public interface IMainView {
+public interface IWalletView {
 
     void logout();
     void logoutSuccess();

@@ -1,4 +1,4 @@
-package com.example.virtualwallets.mainComponent.view;
+package com.example.virtualwallets.walletComponent.view;
 
 import android.util.Log;
 import android.view.LayoutInflater;

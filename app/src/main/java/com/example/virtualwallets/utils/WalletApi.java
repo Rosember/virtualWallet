@@ -1,8 +1,7 @@
 package com.example.virtualwallets.utils;
 
 import com.example.virtualwallets.loginComponent.model.LoginResponse;
-import com.example.virtualwallets.loginComponent.model.LogoutResponse;
-import com.example.virtualwallets.mainComponent.model.WalletsResponse;
+import com.example.virtualwallets.walletComponent.model.WalletsResponse;
 import com.example.virtualwallets.transferComponent.model.TransferRequest;
 import com.example.virtualwallets.transferComponent.model.TransferResponse;
 

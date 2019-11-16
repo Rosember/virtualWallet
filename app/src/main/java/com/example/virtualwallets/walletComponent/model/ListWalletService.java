@@ -1,4 +1,4 @@
-package com.example.virtualwallets.mainComponent.model;
+package com.example.virtualwallets.walletComponent.model;
 
 import com.example.virtualwallets.AppBase;
 import com.example.virtualwallets.transferComponent.model.Wallets;
@@ -68,10 +68,8 @@ public class ListWalletService implements IListWalletService {
         }
     }
 
-
-
     @Override
-    public void onResume() {
+    public void onDestroy() {
         disposable.dispose();
     }
 

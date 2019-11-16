@@ -262,7 +262,7 @@ public class TransferView extends AppCompatActivity implements ITransferView {
     }
 
     @Override
-    public void onsuccess() {
+    public void onSuccess() {
         showAlertDialog("Aceptado", "Se realiazo la transferencia", R.drawable.ic_check_circle_green_800_48dp);
     }
 
@@ -277,8 +277,18 @@ public class TransferView extends AppCompatActivity implements ITransferView {
     }
 
     @Override
-    public void onLoadMyWallet(List<Wallets> walletsList) {
-        Log.d(TAG, "onLoadMyWallet: resul");
+    public void onErrorCheckWallet() {
+
+    }
+
+    @Override
+    public void findByNumberWallet(String number) {
+
+    }
+
+    @Override
+    public void onLoadListWallet(List<Wallets> walletsList) {
+        Log.d(TAG, "onLoadListWallet: resul");
         if (listWallet.size() > 0) listWallet.clear();
         listWallet.addAll(walletsList);
 

@@ -1,4 +1,4 @@
-package com.example.virtualwallets.mainComponent;
+package com.example.virtualwallets.walletComponent;
 
 /**
  * @autor Ing. Carlos G. Cruz Andia

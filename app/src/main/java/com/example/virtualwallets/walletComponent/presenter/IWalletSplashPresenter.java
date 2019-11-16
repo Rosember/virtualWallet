@@ -1,4 +1,4 @@
-package com.example.virtualwallets.mainComponent.presenter;
+package com.example.virtualwallets.walletComponent.presenter;
 
 /**
  * @autor Ing. Carlos G. Cruz Andia
