@@ -44,7 +44,8 @@ public class LoginServiceImplement implements ILoginPersistence {
                         public void onNext(LoginResponse loginResponse) {
                             Log.d(TAG, "onResponse: " + loginResponse.getToken());
 
-                            AppBase.saveset(AppBase.KEY_TOKEN, loginResponse.getToken());
+                            AppBase.saveset(AppBase.KEY_TOKEN, "Bearer "+loginResponse.getToken());
+                            AppBase.saveset(AppBase.KEY_USER, ""+loginResponse.getUser().getId());
                             presenter.onLoginSucces();
                         }
 

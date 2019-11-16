@@ -33,10 +33,9 @@ public class ListWalletService implements IListWalletService {
     public void onLoadWallets() {
         try {
             String token = AppBase.retrieveset(AppBase.KEY_TOKEN);
-//            String userId = AppBase.retrieveset(AppBase.KEY_USER);
-            String userId = "1";
+            String userId = AppBase.retrieveset(AppBase.KEY_USER);
             api = AppBase.crearServicio(WalletApi.class, AppBase.BASE_URL_SERVICE);
-            api.listWallets(Integer.parseInt(userId), "Bearer " + token)
+            api.listWallets(Integer.parseInt(userId),  token)
                     .subscribeOn(Schedulers.io())
                     .subscribeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<List<WalletsResponse>>() {
