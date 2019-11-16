@@ -35,7 +35,7 @@ public class LogoutServiceImplement implements ILogoutService{
         HashMap<String, String> map = new HashMap<>();
         map.put("user_id",userId);
         api = AppBase.crearServicio(WalletApi.class,AppBase.BASE_URL_SERVICE);
-        api.logout("Bearer "+token,map)
+        api.logout(token,map)
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Boolean>() {
