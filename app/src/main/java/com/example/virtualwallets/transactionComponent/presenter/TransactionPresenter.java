@@ -7,42 +7,54 @@ import com.example.virtualwallets.transactionComponent.view.ITransactionWalletsV
 
 import java.util.List;
 
-public class TransactionPresenter {
+public class TransactionPresenter implements ITransactionPresenter,IBalancePresenter {
 
     private ITransactionWalletsView iTransactionWalletsView;
     private TransactionModel transactionModel;
 
     public TransactionPresenter(ITransactionWalletsView iTransactionWalletsView) {
         this.iTransactionWalletsView = iTransactionWalletsView;
-        transactionModel = new TransactionModel(new TransactionServiceImplement());
+        transactionModel = new TransactionModel(new TransactionServiceImplement(this,this));
     }
 
     public void getTransactions(String numberAccount) {
+        transactionModel.geTransactions(numberAccount);
+    }
 
-        List<DaoTransaction> transactionList =  transactionModel.geTransactions(numberAccount);
-        if (transactionList!=null && transactionList.size()>0 ){
+    public void getCurrentBalance(String numberAccount) {
+        transactionModel.getCurrentBalance(numberAccount);
+    }
+
+    @Override
+    public void currentBalance(double balance) {
+        iTransactionWalletsView.showCurrentBalance(balance);
+    }
+
+    @Override
+    public void NetworkErrorInCurrentBalance(String message) {
+        iTransactionWalletsView.showNetworkErrorMessage();
+    }
+
+    @Override
+    public void Transactions(List<DaoTransaction> transactions) {
+        if (transactions!=null && transactions.size()>0 ){
             iTransactionWalletsView.showAccount();
-            iTransactionWalletsView.showTransactions(transactionList);
+            iTransactionWalletsView.showTransactions(transactions);
             return;
         }
-        if (transactionList!=null && transactionList.size() == 0){
+        if (transactions!=null && transactions.size() == 0){
             iTransactionWalletsView.showAccount();
             iTransactionWalletsView.showNoTransaction();
             return;
         }
-        if (transactionList==null){
+        if (transactions==null){
             iTransactionWalletsView.showNetworkErrorMessage();
             return;
         }
-
     }
 
-    public void getCurrentBalance(String numberAccount) {
-        Double balance =  transactionModel.getCurrentBalance(numberAccount);
-        if (balance!= null){
-            iTransactionWalletsView.showCurrentBalance(balance);
-            return;
-        }
+    @Override
+    public void NetworkErrorInTransaction(String message) {
         iTransactionWalletsView.showNetworkErrorMessage();
     }
 }

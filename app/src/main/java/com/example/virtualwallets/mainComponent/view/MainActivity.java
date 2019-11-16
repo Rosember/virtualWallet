@@ -122,6 +122,10 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnItem
     public void itemClick(Object o, int pos) {
         Log.d(TAG, "itemClick: mainActivity ");
         Intent i = new Intent(MainActivity.this, TransactionWalletsView.class);
+        Wallets wallets = (Wallets) o;
+        i.putExtra("numeroCuenta", wallets.getNombre());
+        i.putExtra("idCuenta", wallets.getId());
+
         startActivity(i);
     }
 
