@@ -1,6 +1,7 @@
 package com.example.virtualwallets.utils;
 
 import com.example.virtualwallets.loginComponent.model.LoginResponse;
+import com.example.virtualwallets.transferComponent.model.WalletResponse;
 import com.example.virtualwallets.walletComponent.model.WalletsResponse;
 import com.example.virtualwallets.transferComponent.model.TransferRequest;
 import com.example.virtualwallets.transferComponent.model.TransferResponse;
@@ -36,4 +37,7 @@ public interface WalletApi {
 
     @POST("transactions")
     Call<TransferResponse> transfer(@Header("Authorization") String token,@Body TransferRequest request);
+
+    @GET("wallets/by-number/{wallet_number_a}")
+    Call<WalletResponse> findByNumberWallet(@Path("wallet_number_a") String number,@Header("Authorization") String token);
 }

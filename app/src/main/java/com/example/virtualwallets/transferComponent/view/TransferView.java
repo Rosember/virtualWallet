@@ -1,5 +1,6 @@
 package com.example.virtualwallets.transferComponent.view;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +38,8 @@ public class TransferView extends AppCompatActivity implements ITransferView {
     public static final String MIS_BILLETERA = "Mis Billeteras";
     private static final String TRANSFER_TYPE = "TRANSFERENCE";
     private final String TAG = getClass().getSimpleName();
+    public ProgressDialog progressDialog;
+
     @BindView(R.id.toolbar_transfer)
     public Toolbar toolbar;
     @BindView(R.id.rl_container_transfer)
@@ -90,6 +93,7 @@ public class TransferView extends AppCompatActivity implements ITransferView {
         getSupportActionBar().setTitle("Transferencia");
         toolbar.setNavigationOnClickListener(arrow -> onBackPressed());
         presenter = new TranseferPresenter(this);
+        startLoading();
         presenter.onLoadWalletCombo();
         nroCuenta.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
@@ -97,6 +101,10 @@ public class TransferView extends AppCompatActivity implements ITransferView {
                 Log.d(TAG, "onCreate: ...... -> " + value);
                 // search for request api with nroWallet
                 nroCuenta.setEnabled(false);
+                if (!value.trim().equals("")){
+                    startLoading();
+                    presenter.findByNumberWallet(value);
+                }
             }
         });
 
@@ -253,12 +261,22 @@ public class TransferView extends AppCompatActivity implements ITransferView {
 
     @Override
     public void startLoading() {
-
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage(getResources().getString(R.string.progressbar_cargando));
+            progressDialog.show();
+        } else if (!progressDialog.isShowing()) {
+            progressDialog.show();
+        }
     }
 
     @Override
     public void stopLoading() {
-
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 
     @Override
@@ -277,14 +295,17 @@ public class TransferView extends AppCompatActivity implements ITransferView {
     }
 
     @Override
-    public void onErrorCheckWallet() {
-
+    public void onErrorFindByNumberWallet() {
+        tilNroCuenta.setError("Nro no encontrado");
     }
 
     @Override
-    public void findByNumberWallet(String number) {
-
+    public void onFoundNumber(Integer number) {
+        request.setDestinyWalletId(number);
+        nroCuenta.setEnabled(true);
+        stopLoading();
     }
+
 
     @Override
     public void onLoadListWallet(List<Wallets> walletsList) {
@@ -296,6 +317,7 @@ public class TransferView extends AppCompatActivity implements ITransferView {
         for (int i = 0; i < walletsList.size(); i++) {
             listOriegen[i] = walletsList.get(i).getNombre();
         }
+        stopLoading();
         origen.setEnabled(true);
     }
 }

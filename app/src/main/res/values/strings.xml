@@ -12,5 +12,6 @@
     <string name="network_error">"Network error"</string>
     <string name="there_are_no_transaction">"There are no transactions"</string>
     <string name="title_transaction">"Transactions"</string>
+    <string name="progressbar_cargando">Cargando...</string>
 
 </resources>

@@ -2,6 +2,8 @@ package com.example.virtualwallets.transferComponent.presenter;
 
 import android.util.Log;
 
+import com.example.virtualwallets.transferComponent.model.CheckWallet;
+import com.example.virtualwallets.transferComponent.model.ICheckWallet;
 import com.example.virtualwallets.walletComponent.model.ListWalletService;
 import com.example.virtualwallets.transferComponent.model.TransferRequest;
 import com.example.virtualwallets.transferComponent.model.Wallets;
@@ -57,7 +59,18 @@ public class TranseferPresenter implements ITransferPresenter, OnServiceResponse
 
     @Override
     public void findByNumberWallet(String number) {
+        ICheckWallet checkWallet = new CheckWallet();
+        checkWallet.findByNumberWallet(number, new OnServiceResponse<Integer>() {
+            @Override
+            public void onComplet(Integer result) {
+                view.onFoundNumber(result);
+            }
 
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 
     @Override

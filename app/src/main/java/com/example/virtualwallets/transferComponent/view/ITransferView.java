@@ -16,6 +16,6 @@ public interface ITransferView {
     void onLoadListWallet(List<Wallets> walletsList);
     void onErrorLoadWallet();
     void onErrorTransfer();
-    void onErrorCheckWallet();
-    void findByNumberWallet(String number);
+    void onErrorFindByNumberWallet();
+    void onFoundNumber(Integer number);
 }

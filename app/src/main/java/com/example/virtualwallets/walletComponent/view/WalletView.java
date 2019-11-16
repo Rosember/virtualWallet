@@ -151,27 +151,26 @@ public class WalletView extends AppCompatActivity implements IWalletView, OnItem
 
     @Override
     public void onLoad() {
-        if (listWallet.size()>0){
-            listWallet.clear();
-            adapter.notifyDataSetChanged();
-        }
         onStartRefreshSwipeWallet();
+        if (this.listWallet.size()>0){
+            this.listWallet.clear();
+            this.listWallet = new ArrayList<>();
+        }
+        this.adapter.notifyDataSetChanged();
         presenter.onLoadWallets();
     }
 
     @Override
     public void onLoadSuccess(List<Wallets> wallets) {
+        Log.d(TAG, "onLoadSuccess: "+wallets.toString());
+        this.listWallet.addAll(wallets);
+        this.adapter.notifyDataSetChanged();
         onStopRefreshSwipeWallet();
-        if (listWallet.size() > 0) {
-            listWallet.clear();
-        }
-        listWallet.addAll(wallets);
-        adapter.notifyDataSetChanged();
+
     }
 
     @Override
     public void onStopRefreshSwipeWallet() {
-//        adapter.notifyDataSetChanged();
         refreshLayout.setRefreshing(false);
 
     }
